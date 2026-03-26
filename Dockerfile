@@ -9,6 +9,9 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/target/clinica-web-3.9-PLATINUM.jar app.jar
+COPY clinica_aauca.db .
+COPY docker-entrypoint.sh .
+RUN chmod +x docker-entrypoint.sh
 ENV DB_PATH=/data/clinica_aauca.db
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
