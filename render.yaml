@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: clinica-aauca-web
+    env: docker
+    plan: free
+    region: oregon # adjust as needed
+    dockerCommand: null
+    healthCheckPath: /api/patients
+    disk:
+      name: clinica-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:sqlite:/data/clinica_aauca.db

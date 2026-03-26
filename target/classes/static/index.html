@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Aauca | Portal Web Platinum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-staff-snake"></i>
+                <span>AAUCA WEB</span>
+            </div>
+            <nav>
+                <a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-users"></i> Pacientes</a>
+                <a href="#"><i class="fas fa-calendar-alt"></i> Citas</a>
+                <a href="#"><i class="fas fa-file-invoice-dollar"></i> Facturación</a>
+                <a href="#"><i class="fas fa-box"></i> Inventario</a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">A</div>
+                <div class="user-info">
+                    <p class="name">Administrador</p>
+                    <p class="role">Sede Malabo</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header class="top-bar">
+                <h1>Panel de Control <span>v3.9 Platinum</span></h1>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar pacientes (DIP)...">
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-user-injured"></i>
+                    <div class="stat-info">
+                        <h3>Pacientes hoy</h3>
+                        <p class="number">24</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-info">
+                        <h3>Citas pendientes</h3>
+                        <p class="number">12</p>
+                    </div>
+                </div>
+                <div class="stat-card income">
+                    <i class="fas fa-coins"></i>
+                    <div class="stat-info">
+                        <h3>Recaudación (FCFA)</h3>
+                        <p class="number">450.000</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="main-grid">
+                <div class="data-table-container glass-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-users"></i> Pacientes Recientes</h2>
+                        <button class="btn-primary">Nuevo Paciente</button>
+                    </div>
+                    <table id="patients-table">
+                        <thead>
+                            <tr>
+                                <th>DIP</th>
+                                <th>Nombre Completo</th>
+                                <th>Ubicación</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loaded via Javascript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="inventory-summary glass-card">
+                    <h2><i class="fas fa-box"></i> Alertas de Stock</h2>
+                    <ul class="stock-list">
+                        <li>
+                            <span>Artesunato</span>
+                            <span class="badge low">5 unidades</span>
+                        </li>
+                        <li>
+                            <span>Paracetamol</span>
+                            <span class="badge ok">120 unidades</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

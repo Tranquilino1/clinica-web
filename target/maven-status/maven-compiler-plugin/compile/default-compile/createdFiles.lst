@@ -1,0 +1,10 @@
+com\clinica\aauca\clinicaweb\controller\PatientController.class
+com\clinica\aauca\clinicaweb\model\Product.class
+com\clinica\aauca\clinicaweb\repository\UserRepository.class
+com\clinica\aauca\clinicaweb\model\Patient.class
+com\clinica\aauca\clinicaweb\ClinicaWebApplication.class
+com\clinica\aauca\clinicaweb\controller\ProductController.class
+com\clinica\aauca\clinicaweb\repository\ProductRepository.class
+com\clinica\aauca\clinicaweb\config\SecurityConfig.class
+com\clinica\aauca\clinicaweb\repository\PatientRepository.class
+com\clinica\aauca\clinicaweb\model\User.class
