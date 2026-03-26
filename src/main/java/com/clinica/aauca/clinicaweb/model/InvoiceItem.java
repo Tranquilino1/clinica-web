@@ -6,18 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "productos")
+@Table(name = "factura_detalles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class InvoiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @Column(name = "alerta_minima")
-    private Integer minAlert = 5;
-
-    private String categoria;
+    private String name;
+    private Double price;
+    private Integer quantity;
 }

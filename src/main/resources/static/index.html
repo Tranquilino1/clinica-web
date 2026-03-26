@@ -85,16 +85,25 @@
                 </div>
             </div>
 
-            <div id="section-appointments" class="app-section" style="display: none;">
-                <div class="card-header">
-                    <h2>Agenda de Citas</h2>
-                    <button class="btn-primary">Programar Cita</button>
-                </div>
-                <div class="glass-card">
-                    <table id="appointments-table">
-                        <thead><tr><th>Fecha</th><th>Hora</th><th>Paciente</th><th>Estado</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
+            <div id="section-billing" class="app-section" style="display: none;">
+                <div class="billing-grid">
+                    <div class="glass-card">
+                        <h3>Servicios e Inventario</h3>
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar producto..." onkeyup="filterProducts(this.value)">
+                        </div>
+                        <div id="inventory-list" class="item-list"></div>
+                    </div>
+                    <div class="glass-card">
+                        <h3>Detalle de Facturación</h3>
+                        <div id="invoice-items" class="invoice-items-list"></div>
+                        <div class="totals">
+                            <div><span>Subtotal:</span> <span id="lbl-subtotal">0 FCFA</span></div>
+                            <div><span>IVA (15%):</span> <span id="lbl-tax">0 FCFA</span></div>
+                            <div class="grand-total"><span>TOTAL:</span> <span id="lbl-total">0 FCFA</span></div>
+                        </div>
+                        <button class="btn-primary full-width" onclick="emitInvoice()"><i class="fas fa-print"></i> EMITIR FACTURA</button>
+                    </div>
                 </div>
             </div>
         </main>

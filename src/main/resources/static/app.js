@@ -112,36 +112,73 @@ async function loadDashboardStats() {
     } catch (e) { console.error('Stats error:', e); }
 }
 
+// Patients Module
 async function loadPatients() {
     const table = document.querySelector('#patients-table tbody');
     try {
         const data = await fetch(API.patients).then(r => r.json());
         table.innerHTML = data.map(p => `
-            <tr>
+            <tr onclick="editPatient(${p.id})">
                 <td>${p.dni}</td>
                 <td>${p.fullName}</td>
-                <td>${p.direccion || '-'}</td>
+                <td>${p.telefono || '-'}</td>
                 <td>
-                    <button class="btn-primary" onclick="viewPatient(${p.id})">Expediente</button>
+                    <button class="btn-primary btn-sm" onclick="viewHistory(${p.id})"><i class="fas fa-file-medical"></i></button>
                 </td>
             </tr>
         `).join('');
-    } catch (e) { table.innerHTML = '<tr><td colspan="4">Error al cargar datos</td></tr>'; }
+    } catch (e) { console.error(e); }
 }
 
-async function loadAppointments() {
-    const table = document.querySelector('#appointments-table tbody');
-    try {
-        const data = await fetch(API.appointments).then(r => r.json());
-        table.innerHTML = data.map(a => `
-            <tr>
-                <td>${a.date}</td>
-                <td>${a.time}</td>
-                <td>Paciente #${a.patientId}</td>
-                <td><span class="badge ${a.estado === 'PENDIENTE' ? 'low' : 'ok'}">${a.estado}</span></td>
-            </tr>
-        `).join('');
-    } catch (e) { table.innerHTML = '<tr><td colspan="4">Error al cargar citas</td></tr>'; }
+async function savePatient(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const patient = Object.fromEntries(formData);
+    
+    await fetch(API.patients, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(patient)
+    });
+    hideModal('patient-modal');
+    loadPatients();
+}
+
+// Billing Module
+let currentInvoiceItems = [];
+
+async function loadProducts() {
+    const products = await fetch('/api/products').then(r => r.json());
+    const container = document.getElementById('inventory-list');
+    container.innerHTML = products.map(p => `
+        <div class="product-item" onclick="addToInvoice('${p.name}', ${p.price})">
+            <span>${p.name} - <b>${p.price} FCFA</b></span>
+            <i class="fas fa-plus-circle"></i>
+        </div>
+    `).join('');
+}
+
+function addToInvoice(name, price) {
+    currentInvoiceItems.push({ name, price, qty: 1 });
+    renderInvoice();
+}
+
+function renderInvoice() {
+    const list = document.getElementById('invoice-items');
+    const subtotal = currentInvoiceItems.reduce((acc, item) => acc + item.price, 0);
+    const tax = subtotal * 0.15;
+    const total = subtotal + tax;
+
+    list.innerHTML = currentInvoiceItems.map(item => `
+        <div class="invoice-row">
+            <span>${item.name}</span>
+            <span>${item.price} FCFA</span>
+        </div>
+    `).join('');
+
+    document.getElementById('lbl-subtotal').innerText = subtotal + ' FCFA';
+    document.getElementById('lbl-tax').innerText = tax + ' FCFA';
+    document.getElementById('lbl-total').innerText = total + ' FCFA';
 }
 
 // UI Helpers
