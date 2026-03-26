@@ -6,10 +6,9 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Run stage
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/target/clinica-web-3.9-PLATINUM.jar app.jar
-# The SQLite database path
 ENV DB_PATH=/data/clinica_aauca.db
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
